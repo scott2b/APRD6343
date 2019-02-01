@@ -6,6 +6,9 @@ from multiprocessing import cpu_count
 
 # this should be your checkpoint #2 file
 REVIEWS_FILE = 
+# output files
+CLASSIFIED_REVIEWS_FILE = 'classified_reviews.jsonl'
+TOPICS_FILE = 'lda_topics.txt'
 
 N_TOPICS = 25
 CORES = cpu_count()
@@ -15,6 +18,7 @@ BUILD_VIZ = False # note: pyLDAvis is heavy - don't run it unless you need a new
 if BUILD_VIZ:
     import pyLDAvis
     import pyLDAvis.sklearn
+
 
 review_count = 0
 def load_reviews():
@@ -48,7 +52,6 @@ if BUILD_VIZ:
     pyLDAvis.save_html(p, 'pyLDAvis.html')
     print('.. done writing pyLDAvis.html')
 
-TOPICS_FILE = 'lda_topics.txt'
 topics = []
 def write_topics_file():
     print('Writing topics to: %s' % TOPICS_FILE)
@@ -67,8 +70,6 @@ def write_topics_file():
     print('.. done writing topics file')
 write_topics_file()
 
-
-CLASSIFIED_REVIEWS_FILE = 'classified_reviews.jsonl'
 
 def write_classified_docs():
     print('Writing classified reviews to: %s' % CLASSIFIED_REVIEWS_FILE)
